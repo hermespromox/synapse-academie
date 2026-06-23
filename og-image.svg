@@ -4,6 +4,6 @@
   <rect x="80" y="80" width="160" height="160" rx="42" fill="#2737d8"/>
   <text x="160" y="165" font-family="system-ui" font-weight="800" font-size="88" fill="white" text-anchor="middle">S</text>
   <text x="280" y="130" font-family="system-ui" font-weight="800" font-size="64" fill="white">Synapse</text>
-  <text x="80" y="340" font-family="system-ui" font-weight="700" font-size="54" fill="white">Adoption IA pour équipes métier</text>
-  <text x="80" y="420" font-family="system-ui" font-weight="400" font-size="30" fill="#aeb4c0">Cas d’usage · workflows · skills · agents</text>
+  <text x="80" y="340" font-family="system-ui" font-weight="700" font-size="54" fill="white">Use cases IA activables</text>
+  <text x="80" y="420" font-family="system-ui" font-weight="400" font-size="30" fill="#aeb4c0">Transfert de compétence · workflows · agents</text>
 </svg>
