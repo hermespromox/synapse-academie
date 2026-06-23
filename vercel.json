@@ -2,5 +2,9 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/formations", "destination": "/offres", "permanent": true },
+    { "source": "/formateurs", "destination": "/methode", "permanent": true }
+  ]
 }
