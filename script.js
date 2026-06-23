@@ -1,49 +1,6 @@
 
-// FAQ toggle
-document.querySelectorAll('.faq-q').forEach(q => {
-  q.addEventListener('click', () => {
-    q.parentElement.classList.toggle('open');
-  });
-});
-
-// Mobile menu toggle
-const menuToggle = document.getElementById('menu-toggle');
-if(menuToggle){
-  menuToggle.addEventListener('click',()=>{
-    const nav = document.getElementById('mobile-nav');
-    nav.classList.toggle('open');
-  });
-}
-
-// Form validation
-const contactForm = document.getElementById('contact-form');
-if(contactForm){
-  contactForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    const btn = this.querySelector('button[type=submit]');
-    const orig = btn.textContent;
-    btn.textContent = 'Envoi en cours...';
-    btn.disabled = true;
-
-    const data = new FormData(this);
-    fetch('/api/contact', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify(Object.fromEntries(data))
-    })
-    .then(r => {
-      if(!r.ok) throw new Error('Erreur');
-      return r.json();
-    })
-    .then(() => {
-      btn.textContent = 'Message envoyé ✓';
-      btn.style.background = 'var(--green)';
-      this.reset();
-    })
-    .catch(() => {
-      btn.textContent = orig;
-      btn.disabled = false;
-      alert('Erreur. Réessayez ou contactez-nous par email.');
-    });
-  });
-}
+(function(){
+  document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('click',function(){var item=btn.closest('.faq-item');var open=item.classList.toggle('open');btn.setAttribute('aria-expanded',String(open));});});
+  var form=document.getElementById('contact-form'); if(!form) return;
+  form.addEventListener('submit',function(e){e.preventDefault();var status=document.getElementById('form-status');var btn=form.querySelector('button[type="submit"]');var original=btn.textContent;btn.disabled=true;btn.textContent='Envoi…';status.textContent='';var payload=Object.fromEntries(new FormData(form));fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(function(r){return r.json().then(function(j){return {ok:r.ok,body:j};});}).then(function(res){if(!res.ok) throw new Error(res.body&&res.body.error||'Erreur');status.textContent='Votre demande a bien été envoyée.';form.reset();}).catch(function(){var subject=encodeURIComponent('Demande Synapse Académie');var body=encodeURIComponent('Bonjour,\n\nJe souhaite échanger au sujet de Synapse Académie.\n\nNom : '+(payload.name||'')+'\nEntreprise : '+(payload.company||'')+'\nBesoin : '+(payload.interest||'')+'\nMessage : '+(payload.message||''));status.innerHTML='Le formulaire est indisponible pour le moment. Vous pouvez envoyer votre demande par email : <a href="mailto:contact@synapse-academie.com?subject='+subject+'&body='+body+'">contact@synapse-academie.com</a>';}).finally(function(){btn.disabled=false;btn.textContent=original;});});
+})();
